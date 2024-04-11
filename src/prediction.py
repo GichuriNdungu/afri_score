@@ -3,14 +3,14 @@ import streamlit as st
 from sklearn import preprocessing
 import pandas as pd 
 import numpy as np
-import pickle
+import json
 import os
+from tensorflow.keras.models import load_model
+from joblib import load
 
 cwd = os.getcwd()
-model_path = os.path.join(cwd, 'models', 'model.pkl')
-encoder_path = os.path.join(cwd, 'models', 'encoder_dict.pkl')
-model = pickle.load(open(model_path, 'rb'))
-encoder_dict = pickle.load(open(encoder_path, 'rb'))
+model =  load_model('../models/model.tf')
+encoder_dict = load('../models/encoder_dict.joblib')
 columns = ['age','job','balance', 'day', 'month', 'duration']
 
 def main():

@@ -8,7 +8,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 import os
 from sklearn.preprocessing import MinMaxScaler
-import pickle
+from joblib import dump
 
 
 df = pd.read_csv('./data/bank.csv', sep=';')
@@ -38,8 +38,7 @@ def encode_data(df):
         df.loc[:, category] = le.fit_transform(df[category])
         le_dict[category] = le
     # save the dictionary of encoders
-    with open('./models/encoder_dict.pkl', 'wb') as f: 
-        pickle.dump(le_dict, f)
+    dump(le_dict, './models/encoder_dict.joblib')
     return df
 
 
