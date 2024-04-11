@@ -9,7 +9,7 @@ from keras.layers import TFSMLayer
 from joblib import load
 
 cwd = os.getcwd()
-model =  TFSMLayer('./models/model.tf', call_endpoint='serving_default')
+model =  TFSMLayer('model.tf', call_endpoint='serving_default')
 encoder_dict = load('./models/encoder_dict.joblib')
 columns = ['age','job','balance', 'day', 'month', 'duration']
 
