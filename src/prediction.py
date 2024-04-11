@@ -5,8 +5,8 @@ import pandas as pd
 import numpy as np
 import pickle
 
-model = pickle.load(open('../models/model.pkl', 'rb'))
-encoder_dict = pickle.load(open('../models/encoder_dict.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
+encoder_dict = pickle.load(open('encoder_dict.pkl', 'rb'))
 columns = ['age','job','balance', 'day', 'month', 'duration']
 
 def main():
