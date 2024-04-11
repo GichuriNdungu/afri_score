@@ -4,9 +4,13 @@ from sklearn import preprocessing
 import pandas as pd 
 import numpy as np
 import pickle
+import os
 
-model = pickle.load(open('model.pkl', 'rb'))
-encoder_dict = pickle.load(open('encoder_dict.pkl', 'rb'))
+cwd = os.getcwd()
+model_path = os.path.join(cwd, 'models', 'model.pkl')
+encoder_path = os.path.join(cwd, 'models', 'encoder_dict.pkl')
+model = pickle.load(open(model_path, 'rb'))
+encoder_dict = pickle.load(open(encoder_path, 'rb'))
 columns = ['age','job','balance', 'day', 'month', 'duration']
 
 def main():
