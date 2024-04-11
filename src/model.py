@@ -1,4 +1,4 @@
-# import the right modules
+#!/usr/bin/env python3
 
 import tensorflow as tf
 from tensorflow.keras import Sequential
@@ -40,7 +40,7 @@ def prepare_data(df):
 def train_and_save_model(x_train_lstm, y_train, x_val_lstm, y_val):
     model_1 = create_model(input_shape=(x_train_lstm.shape[1], x_train_lstm.shape[2]), lstm_units=50, dense_units=10, n_dense_layers=3)
     optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.001)
-    model_1.fit(x_train_lstm, y_train, epochs=10, batch_size=32, validation_data=(x_val_lstm, y_val))
+    model_1.fit(x_train_lstm, y_train, epochs=50, batch_size=32, validation_data=(x_val_lstm, y_val))
     _, accuracy = model_1.evaluate(x_val_lstm, y_val)
     print(f'Model Accuracy: {accuracy * 100:.2f}%')
     # with open('./models/model.pkl', 'wb') as f:
@@ -48,9 +48,9 @@ def train_and_save_model(x_train_lstm, y_train, x_val_lstm, y_val):
 
     try:
         print("Current working directory:", os.getcwd())
-        if not os.path.exists('../models'):
-            os.makedirs('../models')
-        model_1.save('../models/model.tf')
+        if not os.path.exists('./models'):
+            os.makedirs('models')
+        model_1.save('./models/model.tf')
         print("Model saved successfully.")
     except Exception as e:
         print("Error saving model:", str(e))
