@@ -11,7 +11,7 @@ from joblib import load
 cwd = os.getcwd()
 print(cwd)
 model =  tf.saved_model.load('models/model.tf')
-encoder_dict = load('./models/encoder_dict.joblib')
+encoder_dict = load('models/encoder_dict.joblib')
 columns = ['age','job','balance', 'day', 'month', 'duration']
 
 def main():
