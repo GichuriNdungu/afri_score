@@ -5,12 +5,12 @@ import pandas as pd
 import numpy as np
 import json
 import os
-from keras.layers import TFSMLayer
+import tensorflow as tf
 from joblib import load
 
 cwd = os.getcwd()
 print(cwd)
-model =  TFSMLayer('model.tf', call_endpoint='serving_default')
+model =  tf.saved_model.load('models/model.tf')
 encoder_dict = load('./models/encoder_dict.joblib')
 columns = ['age','job','balance', 'day', 'month', 'duration']
 
