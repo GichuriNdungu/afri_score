@@ -9,10 +9,11 @@ import tensorflow as tf
 from joblib import load
 from src.prediction import predict
 from joblib import load
+from tensorflow.keras.models import load_model
 
 cwd = os.getcwd()
 print(cwd)
-model = tf.saved_model.load('models/model.tf')
+model = load_model('models/model.h5')
 encoder_dict = load('models/encoder_dict.joblib')
 print(f'This is the encoder dictionary \n {encoder_dict}')
 columns = ['age','job','balance', 'day', 'month', 'duration']

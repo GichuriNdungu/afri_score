@@ -51,7 +51,7 @@ def train_and_save_model(x_train_lstm, y_train, x_val_lstm, y_val):
         print("Current working directory:", os.getcwd())
         if not os.path.exists('models'):
             os.makedirs('models')
-        tf.saved_model.dump('models/model.tf', model_1)
+        model_1.save('models/model.h5')
         print("Model saved successfully.")
     except Exception as e:
         print("Error saving model:", str(e))
