@@ -23,9 +23,6 @@ def select_features(X, Y, missing_threshold):
     '''drop columns with too many missing values'''
     clf = RandomForestClassifier()
     clf.fit(X, Y)
-    for col in X:
-        if X[col] == 'housing':
-            X = X.drop(col)
     importances = clf.feature_importances_
     columns_to_drop = X.columns[importances < 0.02]
     X_dropped = X.drop(columns_to_drop, axis=1)
@@ -43,8 +40,7 @@ def encode_data(df):
         df.loc[:, category] = le.fit_transform(df[category])
         le_dict[category] = le
     # save the dictionary of encoders
-    with open('models/encoded_dict.pkl', 'wb') as f:
-        pickle.dump(le_dict, f)
+    dump(le_dict, 'models/encoder_dict.joblib')
     return df
 
 def oversample(X, Y):
