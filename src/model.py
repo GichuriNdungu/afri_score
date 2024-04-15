@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 
 import tensorflow as tf
@@ -27,7 +28,7 @@ def prepare_data(df):
     X = df_encoded.drop('y', axis=1)
     Y = df_encoded['y']
     Y = Y.astype(int)
-    X_selected = select_features(X, Y, df_encoded, missing_threshold=0.5)
+    X_selected = select_features(X, Y, missing_threshold=0.5)
     X_resampled, Y_oversampled = oversample(X_selected, Y)
     print(X_resampled)
     X_scaled = scale_features(X_resampled)
@@ -40,7 +41,7 @@ def prepare_data(df):
 def train_and_save_model(x_train_lstm, y_train, x_val_lstm, y_val):
     model_1 = create_model(input_shape=(x_train_lstm.shape[1], x_train_lstm.shape[2]), lstm_units=50, dense_units=10, n_dense_layers=3)
     optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.001)
-    model_1.fit(x_train_lstm, y_train, epochs=50, batch_size=32, validation_data=(x_val_lstm, y_val))
+    model_1.fit(x_train_lstm, y_train, epochs=10, batch_size=32, validation_data=(x_val_lstm, y_val))
     _, accuracy = model_1.evaluate(x_val_lstm, y_val)
     print(f'Model Accuracy: {accuracy * 100:.2f}%')
     # with open('./models/model.pkl', 'wb') as f:
@@ -50,7 +51,8 @@ def train_and_save_model(x_train_lstm, y_train, x_val_lstm, y_val):
         print("Current working directory:", os.getcwd())
         if not os.path.exists('models'):
             os.makedirs('models')
-        tf.saved_model.save(model_1, './models')
+        with open('models/model_1.pkl', 'wb') as f:
+            pickle.dump(model_1, f)
         print("Model saved successfully.")
     except Exception as e:
         print("Error saving model:", str(e))

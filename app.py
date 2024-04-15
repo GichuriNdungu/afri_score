@@ -7,11 +7,14 @@ import json
 import os
 import tensorflow as tf
 from joblib import load
+from src.prediction import predict
+import pickle
 
 cwd = os.getcwd()
 print(cwd)
-model =  tf.saved_model.load('models/model.tf')
-encoder_dict = load('models/encoder_dict.joblib')
+model = pickle.load(open('models/model_1.pkl', 'rb'))
+encoder_dict = pickle.load(open('models/encoded_dict.pkl', 'rb'))
+print(f'This is the encoder dictionary \n {encoder_dict}')
 columns = ['age','job','balance', 'day', 'month', 'duration']
 
 def main():
@@ -27,6 +30,8 @@ def main():
     job = st.selectbox("job", ["unemployed", "services", "management", "blue-collar", "self-employed", "technician", "entreprenuer", "admin.", "student", "housemaid", "retired", "unknown"])
     month = st.selectbox("month", ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])
     marital = st.selectbox("Marital", ["single","maried","divorced"])
+    housing = st.selectbox('Housing', ['No', 'Yes'])
+    housing = 0 if housing == "No" else 1
     education = st.selectbox('Education', ['primary','secondary','tertiary','unknown'])
     contact = st.selectbox('Contact', ['cellular','unknown','telephone'])
     poutcome = st.selectbox('Poutcome', ['failure','other','success','unknown'])
@@ -38,13 +43,10 @@ def main():
     pdays = st.text_input("pdays", "0")
 
     if st.button("Predict"):
-        features = [[age, job, month, day, balance, duration,pdays, marital, education, contact, poutcome, campaign, previous]]
-        data = {'age': int(age), 'job':job, 'month': month, 'day':int(day), 'balance': int(balance), 'duration':int(duration), 'pdays': int(pdays), 'marital':marital,
+        data = {'age': int(age), 'job':job, 'month': month, 'housing': housing, 'day':int(day), 'balance': int(balance), 'duration':int(duration), 'pdays': int(pdays), 'marital':marital,
                  'education':education, 'contact': contact, 'poutcome': poutcome, 'campaign': int(campaign), 'previous': int(previous)}
         print(data)
-        df = pd.DataFrame([list(data.values())], columns=['age','job','month','day','balance','duration', 'pdays', 'marital', 'education', 'contact', 'poutcome', 'campaign', 'previous'])
-        
-        category_col = ['job', 'month']
+        df = pd.DataFrame([list(data.values())], columns=['age','job','month','day', 'housing', 'balance','duration', 'pdays', 'marital', 'education', 'contact', 'poutcome', 'campaign', 'previous'])
         for cat in encoder_dict:
             for col in df.columns:
                 le = preprocessing.LabelEncoder()
@@ -57,11 +59,11 @@ def main():
                         if unique_item not in list(le.classes_):
                             df[col] = ['Unknown' if x == unique_item else x for x in df[col]]
                         df[col] = le.transform(df[col])
+        print(f'this should be the transformed df\n {df}')
         features_list = df.values.tolist()
         features_array = np.array(features_list)
-        features_array = features_array.reshape(features_array.shape[0], 1, features_array.shape[1])
-        prediction = model.predict(features_array)
-        output = int(prediction[0])
+        print(features_array.dtype)
+        output = predict(model, features_array)
         if output == 0:
             text ="No customer does not qualify for credit"
         else:
