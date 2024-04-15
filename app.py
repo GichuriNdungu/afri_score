@@ -31,8 +31,8 @@ def main():
     job = st.selectbox("job", ["unemployed", "services", "management", "blue-collar", "self-employed", "technician", "entreprenuer", "admin.", "student", "housemaid", "retired", "unknown"])
     month = st.selectbox("month", ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])
     marital = st.selectbox("Marital", ["single","maried","divorced"])
-    housing = st.selectbox('Housing', ['No', 'Yes'])
-    housing = 0 if housing == "No" else 1
+    # housing = st.selectbox('Housing', ['No', 'Yes'])
+    # housing = 0 if housing == "No" else 1
     education = st.selectbox('Education', ['primary','secondary','tertiary','unknown'])
     contact = st.selectbox('Contact', ['cellular','unknown','telephone'])
     poutcome = st.selectbox('Poutcome', ['failure','other','success','unknown'])
@@ -44,10 +44,10 @@ def main():
     pdays = st.text_input("pdays", "0")
 
     if st.button("Predict"):
-        data = {'age': int(age), 'job':job, 'month': month, 'housing': housing, 'day':int(day), 'balance': int(balance), 'duration':int(duration), 'pdays': int(pdays), 'marital':marital,
+        data = {'age': int(age), 'job':job, 'month': month, 'day':int(day), 'balance': int(balance), 'duration':int(duration), 'pdays': int(pdays), 'marital':marital,
                  'education':education, 'contact': contact, 'poutcome': poutcome, 'campaign': int(campaign), 'previous': int(previous)}
         print(data)
-        df = pd.DataFrame([list(data.values())], columns=['age','job','month','day', 'housing', 'balance','duration', 'pdays', 'marital', 'education', 'contact', 'poutcome', 'campaign', 'previous'])
+        df = pd.DataFrame([list(data.values())], columns=['age','job','month','day', 'balance','duration', 'pdays', 'marital', 'education', 'contact', 'poutcome', 'campaign', 'previous'])
         for cat in encoder_dict:
             for col in df.columns:
                 le = preprocessing.LabelEncoder()
