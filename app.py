@@ -46,7 +46,7 @@ def main():
     if st.button("Predict"):
         data = {'age': int(age), 'job':job, 'month': month, 'day':int(day), 'balance': int(balance), 'duration':int(duration), 'pdays': int(pdays), 'marital':marital,
                  'education':education, 'contact': contact, 'poutcome': poutcome, 'campaign': int(campaign), 'previous': int(previous)}
-        print(data)
+        # print(data)
         df = pd.DataFrame([list(data.values())], columns=['age','job','month','day', 'balance','duration', 'pdays', 'marital', 'education', 'contact', 'poutcome', 'campaign', 'previous'])
         for cat in encoder_dict:
             for col in df.columns:
@@ -60,10 +60,9 @@ def main():
                         if unique_item not in list(le.classes_):
                             df[col] = ['Unknown' if x == unique_item else x for x in df[col]]
                         df[col] = le.transform(df[col])
-        print(f'this should be the transformed df\n {df}')
+        # print(f'this should be the transformed df\n {df}')
         features_list = df.values.tolist()
         features_array = np.array(features_list)
-        print(features_array.dtype)
         output = predict(model, features_array)
         if output == 0:
             text ="No customer does not qualify for credit"
