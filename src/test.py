@@ -1,6 +1,6 @@
-from preprocessing import df 
-import numpy as np
-import tensorflow as tf 
+#!/usr/bin/env python3
+import tensorflow as tf
+import keras
 
-non_numeric_cols = df.select_dtypes(include=['object']).columns
-print(non_numeric_cols)
+print(tf.__version__)
+print(keras.__version__)

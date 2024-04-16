@@ -9,7 +9,6 @@ from sklearn.ensemble import RandomForestClassifier
 import os
 from sklearn.preprocessing import MinMaxScaler
 from joblib import dump
-import pickle
 
 
 df = pd.read_csv('./data/bank.csv', sep=';')
@@ -24,9 +23,10 @@ def select_features(X, Y, missing_threshold):
     clf = RandomForestClassifier()
     clf.fit(X, Y)
     importances = clf.feature_importances_
-    columns_to_drop = X.columns[importances < 0.02]
+    columns_to_drop = X.columns[importances < 0.05]
     X_dropped = X.drop(columns_to_drop, axis=1)
     X_dropped = X_dropped.loc[:, X_dropped.isna().mean() < missing_threshold]
+    
     return X_dropped
 
 
@@ -40,9 +40,8 @@ def encode_data(df):
         df.loc[:, category] = le.fit_transform(df[category])
         le_dict[category] = le
     # save the dictionary of encoders
-    dump(le_dict, 'models/encoder_dict.joblib')
+    dump (le_dict, 'models/encoded_dict.joblib')
     return df
-
 def oversample(X, Y):
     '''Augment the target variable to prevent class bias'''
     ros = RandomOverSampler()
