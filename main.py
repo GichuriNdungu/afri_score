@@ -13,7 +13,9 @@ from joblib import load
 
 
 # model load 
+print("before loading the model")
 model = load('models/model.joblib')
+print('after loading the model')
 encoded_dict = load('models/encoded_dict.joblib')
 
 # class for input data
