@@ -1,48 +1,76 @@
 # AFRISCORE
-Afriscore is a machine learning project that leverages machine learning techniques to develop a credit scoring algorithm that determines whether or not individuals are worthy of receiving credit from their Banks.
+This project is a FastAPI application that predicts credit qualification for customers based on certain features. The application is containerized using Docker and is available on Docker Hub.
+
 A detailed proposal to this project can be found [here;](https://docs.google.com/document/d/1XpOUKyt2DH6wQ9Pfeq8w31DLfAjhRlRRcslEcjtVSMM/edit?usp=sharing)
 
-# Afriscore Lean canvas
+## Afriscore Lean canvas
 A lean canvas that defines the business/economic relevance of Afriscore can be found [here;](https://docs.google.com/presentation/d/1CuriQnHya5FZHXnSRDSemWuFRwSQiF11ElNvd3cSdUw/edit?usp=sharing)
 
-## Long Short-Term Memory (LSTM)
+## Features
+- FastAPI for creating the web application
+- Docker for containerization and easy deployment
+- Predictive model for credit qualification
+## Setup
 
-Beyond the typical Neural networks, Afriscore employs Long Short-Term Memory (LSTM).
+### Prerequisites
+* Docker installed on your machine. If you don't have Docker installed, you can download it from [here];(# My FastAPI Project
 
-LSTM is a type of recurrent neural network (RNN) that is capable of learning long-term dependencies in sequence data. This is particularly useful in many real-world tasks because many sequences (such as sentences, time series data, etc.) have dependencies over time.
+This project is a FastAPI application that predicts credit qualification for customers based on certain features. The application is containerized using Docker and is available on Docker Hub.
 
-Traditional RNNs have difficulties learning these long-term dependencies due to the "vanishing gradients" problem, where the contribution of information decays geometrically over time. LSTMs overcome this problem with a unique design.
+## Features
 
-An LSTM has a similar control flow as a standard RNN, it processes data by passing through a sequence of gates, including a forget gate, input gate, and output gate. However, it also has a cell state that runs along the entire chain, with only minor linear interactions. This design helps it to keep or forget information effectively.
+- FastAPI for creating the web application
+- Docker for containerization and easy deployment
+- Predictive model for credit qualification
 
-In this project, LSTM is used as part of the model architecture. The LSTM layer takes in the sequence data and outputs a sequence with the same length, which can be fed into the next layer in the model. This allows the model to understand the temporal dependencies in the sequence data, which is crucial for the credit scoring task.
+## Setup
 
-The main parameters for the LSTM layer are the number of LSTM units and the input shape. The number of LSTM units is the dimensionality of the output space, which can be tuned based on the complexity of the task. The input shape is usually the shape of the sequence data.
+### Prerequisites
 
-In this project, 50 LSTM units are used. This value was chosen based on empirical results showing that it provides a good balance between model complexity and performance.
+- Docker installed on your machine. If you don't have Docker installed, you can download it from [here](https://www.docker.com/products/docker-desktop).
 
-## Optimization Techniques
+### Steps
 
-In this project, several optimization techniques are used to train the deep learning models. These techniques are crucial for finding the best set of parameters that minimize the loss function and improve the model's performance.
+1. **Pull the Docker image from Docker Hub:**
 
-### Stochastic Gradient Descent (SGD)
+   Open your terminal and run the following command to pull the Docker image:
 
-SGD is a variant of gradient descent, a popular optimization algorithm in machine learning. Instead of using the entire data set to compute the gradient, SGD uses a single random example at each iteration. This makes SGD faster and able to handle large datasets.
+   ```bash
+   docker pull martinalu/myrepo:latest
+   ```
 
-The main parameter for SGD is the learning rate, which controls the step size during the gradient descent process. A smaller learning rate means the model will learn slowly, which can lead to better performance but also longer training times. A larger learning rate means the model will learn quickly, but it might also overshoot the optimal solution.
+2. **Run the Docker container:**
 
-In the project herein, a learning rate of 0.01 was used to provive optimum learning of the model.
+   After pulling the image, you can run a container with the following command:
 
-It is important to note that one of the challenges with SGD is the vanishing gradient where the gradients of the loss function become vert small as they are backpropagated through layers of the network. Since the gradients are small, the updates to the weights become smaller too, resulting in signficantly slower training and eventual ceasation of the network's learning.
+   ```bash
+   docker run -p 8000:8000 martinalu/myrepo:latest
+   ```
 
-### RMSprop
+   This command maps port 8000 inside the Docker container to port 8000 on your local machine.
 
-RMSprop uses a moving average of squared gradients to normalize the gradient itself. This helps to resolve the issue of diminishing learning rates experienced in SGD.
+3. **Access the FastAPI application:**
 
-The main parameters for RMSprop are the learning rate and the decay factor. The learning rate is similar to the one in SGD. The decay factor controls the rate at which the moving average decays, similar to momentum.
+   Once the Docker container is running, you can access the FastAPI application at `http://localhost:8000`.
 
-In this project, a learning rate of 0.001 and a decay factor of 0.9 for RMSprop were used.
+## Usage
+
+The application exposes a POST endpoint at `/predict` that accepts JSON data in the following format:
+
+```json
+{
+  "age": 30,
+  "month": "jan",
+  "day": 15,
+  "balance": 2000,
+  "duration": 300,
+  "pdays": 5
+}
+```
+
+You can use a tool like `curl` or Postman to send a POST request to `http://localhost:8000/predict` with the above JSON data.
 
 ## Conclusion
 
-Optimization techniques and parameter tuning play a crucial role in the development of machine learning models. By understanding the underlying principles of these techniques and carefully tuning the parameters, the performance of a model is significantly improved.
+This FastAPI application provides a simple and efficient way to predict credit qualification for customers. With Docker, you can easily deploy and scale the application.).
+Steps
