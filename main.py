@@ -30,6 +30,10 @@ class Data(BaseModel):
 # create an instance of FastApi class 
 app = FastAPI()
 # endpoint for prediction
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
 @app.post("/predict")
 async def predict_credit(data:Data):
     # convert incomeing data to df 

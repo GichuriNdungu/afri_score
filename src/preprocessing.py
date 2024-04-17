@@ -11,7 +11,7 @@ from sklearn.preprocessing import MinMaxScaler
 from joblib import dump
 
 
-df = pd.read_csv('./data/bank.csv', sep=';')
+df = pd.read_csv('../data/bank.csv', sep=';')
 
 # Select independent and dependent variables
 X = df[['job', 'marital', 'education', 'default', 'housing', 'duration', 'loan',
@@ -40,7 +40,7 @@ def encode_data(df):
         df.loc[:, category] = le.fit_transform(df[category])
         le_dict[category] = le
     # save the dictionary of encoders
-    dump (le_dict, 'models/encoded_dict.joblib')
+    dump (le_dict, '../models/encoded_dict.joblib')
     return df
 def oversample(X, Y):
     '''Augment the target variable to prevent class bias'''

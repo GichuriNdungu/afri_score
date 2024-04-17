@@ -1,6 +1,9 @@
 fastapi
 uvicorn
 pandas
+imblearn
+seaborn
+matplotlib
 numpy
 scikit-learn
 tensorflow==2.15.0

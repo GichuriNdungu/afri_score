@@ -47,7 +47,7 @@ def train_and_save_model(x_train, y_train, x_val, y_val):
         print("Current working directory:", os.getcwd())
         if not os.path.exists('models'):
             os.makedirs('models')
-        dump(model, 'models/model.joblib')
+        dump(model, '../models/model.joblib')
         print("Model saved successfully.")
     except Exception as e:
         print("Error saving model:", str(e))
