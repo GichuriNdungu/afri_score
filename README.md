@@ -68,8 +68,7 @@ The application exposes a POST endpoint at `/predict` that accepts JSON data in 
 }
 ```
 
-You can use a tool like `curl` or Postman to send a POST request to `http://localhost:8000/predict` with the above JSON data.
-
+You can use a tool like `curl` or Postman to send a POST request to `http://localhost:8000/predict` with the above JSON data. Additionally, FastAPI provides an interactive Swagger UI that you can use to send requests to the model. You can access this UI at `http://localhost:8000/docs`.
 ## Conclusion
 
 This FastAPI application provides a simple and efficient way to predict credit qualification for customers. With Docker, you can easily deploy and scale the application.).
