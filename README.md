@@ -51,7 +51,7 @@ This project is a FastAPI application that predicts credit qualification for cus
 
 3. **Access the FastAPI application:**
 
-   Once the Docker container is running, you can access the FastAPI application at `http://localhost:8000`.
+   Once the Docker container is running, you can access the FastAPI application at `http://localhost:8000/docs`.
 
 ## Usage
 
