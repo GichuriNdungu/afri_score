@@ -6,16 +6,6 @@ A detailed proposal to this project can be found [here;](https://docs.google.com
 ## Afriscore Lean canvas
 A lean canvas that defines the business/economic relevance of Afriscore can be found [here;](https://docs.google.com/presentation/d/1CuriQnHya5FZHXnSRDSemWuFRwSQiF11ElNvd3cSdUw/edit?usp=sharing)
 
-## Features
-- FastAPI for creating the web application
-- Docker for containerization and easy deployment
-- Predictive model for credit qualification
-## Setup
-
-### Prerequisites
-* Docker installed on your machine. If you don't have Docker installed, you can download it from [here];(# My FastAPI Project
-
-This project is a FastAPI application that predicts credit qualification for customers based on certain features. The application is containerized using Docker and is available on Docker Hub.
 
 ## Features
 
