@@ -70,3 +70,8 @@ This FastAPI application provides a simple and efficient way to predict credit q
 - **Add More Endpoints:** The application currently has a single endpoint. More endpoints could be added to provide additional functionality.
 
 Contributions to this project are welcome. If you have an idea for an improvement, please open an issue to discuss it before making any changes. Once the idea has been approved, you can make the changes and open a pull request.
+
+## Author
+
+- Martin Ndungu
+  - Email: gichurindungu@gmail.com
